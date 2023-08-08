@@ -1,4 +1,11 @@
 import React, { useState } from 'react'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Unstable_Grid2'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormControl from '@mui/material/FormControl'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import TextField from '@mui/material/TextField'
 
 /**
  * The digits of the k.os base 8 number system.
@@ -17,9 +24,7 @@ const base8Digits: { [key: number]: string } = {
 const Base8Converter: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('')
   const [outputValue, setOutputValue] = useState<string>('')
-  const [conversionType, setConversionType] = useState<'toBase8' | 'fromBase8'>(
-    'fromBase8'
-  )
+  const [conversionType, setConversionType] = useState<string>('fromBase8')
 
   /**
    * Converts a decimal value to k.os base 8.
@@ -92,64 +97,48 @@ const Base8Converter: React.FC = () => {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="mb-4">
-        <h2>Enter number:</h2>
-        {/* Toggle */}
-        <div className="mb-4">
-          <div className="inline-block">
-            <div className="form-control inline-block">
-              <label className="label cursor-pointer">
-                <span className="label-text">To Base8</span>
-                <input
-                  checked={conversionType === 'toBase8'}
-                  className="radio checked:bg-blue-500"
-                  name="radio-10"
-                  onChange={() => setConversionType('toBase8')}
-                  type="radio"
-                  value="toBase8"
-                />
-              </label>
-            </div>
-            <div className="form-control inline-block">
-              <label className="label cursor-pointer">
-                <input
-                  checked={conversionType === 'fromBase8'}
-                  className="radio checked:bg-red-500"
-                  name="radio-10"
-                  onChange={() => setConversionType('fromBase8')}
-                  type="radio"
-                  value="fromBase8"
-                />
-                <span className="label-text">From Base8</span>
-              </label>
-            </div>
-          </div>
-        </div>
-        {/* Input field */}
-        <div className="mb-4">
-          <input
-            className="input input-bordered w-full max-w-xs"
-            onChange={handleChange}
-            placeholder="<X<"
-            type="text"
-            value={inputValue}
-          />
-        </div>
-        {/* <button
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-          onClick={handleConvert}
-        >
-          Convert
-        </button> */}
-      </div>
-      <div className="mb-4">
-        <div className="mb-4">
+    <>
+      <Grid xs={12}>
+        <Box>
+          <h2>Enter number:</h2>
+          {/* Toggle */}
+          <FormControl>
+            <RadioGroup
+              row
+              name="radio-10"
+              value={conversionType}
+              onChange={(e) => setConversionType(e.target.value)}
+              aria-labelledby="demo-form-control-label-placement"
+              defaultValue="toBase8"
+            >
+              <FormControlLabel
+                value="fromBase8"
+                control={<Radio />}
+                label="From Base8"
+                labelPlacement="start"
+                sx={{ marginRight: '8px' }}
+              />
+              <FormControlLabel
+                value="toBase8"
+                control={<Radio />}
+                label="To Base8"
+                labelPlacement="end"
+              />
+            </RadioGroup>
+            {/* Input field */}
+            <TextField
+              label="Number"
+              onChange={handleChange}
+              placeholder={conversionType === 'fromBase8' ? '<X<' : '300'}
+              variant="outlined"
+              value={inputValue}
+            />
+          </FormControl>
           <h2>Output</h2>
           {outputValue}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Grid>
+    </>
   )
 }
 

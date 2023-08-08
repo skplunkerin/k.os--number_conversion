@@ -1,3 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*** FONTS ***/
+@font-face {
+  font-family: 'Futurette';
+  src: url('/fonts/futurette/Futurette-ExtraLight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Futurette';
+  src: url('/fonts/futurette/Futurette-ExtraLightOblique.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+}
+body {
+  font-family: 'Futurette', Arial, sans-serif;
+}
+/*** END FONTS ***/

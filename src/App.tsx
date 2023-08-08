@@ -1,12 +1,15 @@
 import './App.css'
+import Grid from '@mui/material/Unstable_Grid2'
 import Base8Converter from './components/Base8Converter'
 
 function App() {
   return (
-    <div className="md:container md:mx-auto">
-      <h1 className="text-3xl font-bold">k.os numbering system converter</h1>
+    <Grid container spacing={2}>
+      <Grid xs={12}>
+        <h1>K.OS Number Converter</h1>
+      </Grid>
       <Base8Converter />
-    </div>
+    </Grid>
   )
 }
 
